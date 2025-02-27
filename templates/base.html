@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Pet Shop - Sistema</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <a class="navbar-brand" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='images/pet_logo.png') }}" width="40" height="40" alt="">
+      Pet Shop
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('calendar_view', year=now.year, month=now.month) }}">Calendário</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('schedule') }}">Agendar</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('add_product') }}">Adicionar Produto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('stock') }}">Estoque</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('new_sale') }}">Vendas</a>
+            </li>
+          </ul>
+          
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info alert-dismissible fade show" role="alert">
+            <strong>Aviso:</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

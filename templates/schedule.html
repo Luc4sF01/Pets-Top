@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Agendar Novo Horário</h1>
+<form method="POST">
+  <div class="form-group">
+    <label for="customer_name">Nome do Cliente</label>
+    <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+  </div>
+  <div class="form-group">
+    <label for="service_type">Tipo de Serviço</label>
+    <select class="form-control" id="service_type" name="service_type" required>
+      <option value="Banho e Tosa">Banho e Tosa</option>
+      <option value="Somente Banho">Somente Banho</option>
+      <option value="Somente Tosa">Somente Tosa</option>
+    </select>
+  </div>
+  <div class="form-group form-check">
+    <input type="checkbox" class="form-check-input" id="is_package" name="is_package">
+    <label class="form-check-label" for="is_package">É pacote? (Agendamento recorrente)</label>
+  </div>
+  <div id="package_fields" style="display:none;">
+    <div class="form-group">
+      <label>Selecione os dias da semana:</label><br>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaSegunda" value="Segunda">
+        <label class="form-check-label" for="diaSegunda">Segunda</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaTerca" value="Terça">
+        <label class="form-check-label" for="diaTerca">Terça</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaQuarta" value="Quarta">
+        <label class="form-check-label" for="diaQuarta">Quarta</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaQuinta" value="Quinta">
+        <label class="form-check-label" for="diaQuinta">Quinta</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaSexta" value="Sexta">
+        <label class="form-check-label" for="diaSexta">Sexta</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaSabado" value="Sábado">
+        <label class="form-check-label" for="diaSabado">Sábado</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" name="recurrence_days" id="diaDomingo" value="Domingo">
+        <label class="form-check-label" for="diaDomingo">Domingo</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="recurrence_time">Horário (aplicado a todos os dias selecionados)</label>
+      <input type="time" class="form-control" id="recurrence_time" name="recurrence_time">
+    </div>
+    <div class="form-group">
+      <label for="duration_weeks">Duração do Pacote (semanas)</label>
+      <input type="number" class="form-control" id="duration_weeks" name="duration_weeks" value="4" min="1">
+    </div>
+  </div>
+  <div id="single_fields">
+    <div class="form-group">
+      <label for="appointment_datetime">Data e Hora</label>
+      <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary">Agendar</button>
+</form>
+
+<script>
+  document.getElementById('is_package').addEventListener('change', function() {
+    var packageFields = document.getElementById('package_fields');
+    var singleFields = document.getElementById('single_fields');
+    if (this.checked) {
+      packageFields.style.display = 'block';
+      singleFields.style.display = 'none';
+    } else {
+      packageFields.style.display = 'none';
+      singleFields.style.display = 'block';
+    }
+  });
+</script>
+{% endblock %}

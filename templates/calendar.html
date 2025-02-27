@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="calendar-nav">
+  <a href="{{ url_for('calendar_view', year=prev_year, month=prev_month) }}" class="btn btn-secondary">&laquo; Anterior</a>
+  <h2 class="month-title">{{ month_name }} {{ year }}</h2>
+  <a href="{{ url_for('calendar_view', year=next_year, month=next_month) }}" class="btn btn-secondary">Próximo &raquo;</a>
+</div>
+
+<table class="calendar-table table table-bordered">
+  <thead>
+    <tr>
+      <th>Dom</th>
+      <th>Seg</th>
+      <th>Ter</th>
+      <th>Qua</th>
+      <th>Qui</th>
+      <th>Sex</th>
+      <th>Sáb</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for week in weeks %}
+      <tr>
+        {% for day in week %}
+          {% if day %}
+            {% set has_appts = day.appointments|length > 0 %}
+            <td class="day-cell {% if has_appts %}has-appointments{% endif %}">
+              <div class="day-number">
+                <a href="{{ url_for('day_view', year=year, month=month, day=day.date.split('-')[-1]|int) }}">
+                  {{ day.date.split('-')[-1] }}
+                </a>
+              </div>
+            </td>
+          {% else %}
+            <td class="empty-cell"></td>
+          {% endif %}
+        {% endfor %}
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

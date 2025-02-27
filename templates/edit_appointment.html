@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Editar Agendamento</h1>
+<form method="POST">
+  <div class="form-group">
+    <label for="customer_name">Nome do Cliente</label>
+    <input type="text" class="form-control" id="customer_name" name="customer_name" value="{{ appointment['customer_name'] }}" required>
+  </div>
+  <div class="form-group">
+    <label for="service_type">Tipo de Serviço</label>
+    <select class="form-control" id="service_type" name="service_type" required>
+      <option value="Banho e Tosa" {% if appointment['service_type'] == 'Banho e Tosa' %}selected{% endif %}>Banho e Tosa</option>
+      <option value="Somente Banho" {% if appointment['service_type'] == 'Somente Banho' %}selected{% endif %}>Somente Banho</option>
+      <option value="Somente Tosa" {% if appointment['service_type'] == 'Somente Tosa' %}selected{% endif %}>Somente Tosa</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="appointment_datetime">Data e Hora</label>
+    <input type="datetime-local" class="form-control" id="appointment_datetime" name="appointment_datetime" value="{{ appointment['appointment_datetime'] }}" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Atualizar</button>
+</form>
+{% endblock %}
