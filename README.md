@@ -1,4 +1,4 @@
-Pet Shop Sistema - Agendamento, Estoque, Vendas e Produtos
+Pets TOP Sistema - Agendamento, Estoque, Vendas e Produtos
 Este é um sistema web desenvolvido em Python utilizando Flask e SQLite, projetado para gerenciar as operações de um pet shop. O sistema permite o agendamento de serviços, o cadastro e controle de produtos (estoque) e o registro de vendas.
 
 Funcionalidades
